@@ -17,25 +17,31 @@ public Class Date{
         }
     }
      public boolean isSameDay(Date date2){
-        if (date2get.day == this.day){
-            System.out.println("Los dias coinciden.");
+        boolean valor1;
+        if (date2.getday == this.day){
+            valor1 = true;
         }
         else
-         System.out.println("Los dias son diferentes.");
+         valor1 = false;
+        return valor1;
     }
     public boolean isSameMonth(Date date2){
-        if (date2get.month == this.month){
-            System.out.println("Los meses coinciden.");
+        boolean valor2;
+        if (date2.getMonth == this.month){
+            valor2 = true;
         }
         else
-         System.out.println("Los meses son diferentes.");
+         valor2 = false;
+        return valor2;
     }
     public boolean isSameYear(Date date2){
-        if (date2get.year == this.year){
-            System.out.println("Los años coinciden.");
+        boolean valor3;
+        if (date2.getYear == this.year){
+            valor3 = true;
         }
         else
-         System.out.println("Los años son diferentes.");
+         valor3 = false;
+        return valor3;
     }
     public boolean isSame (Date date2){
         if (this.date2 == this.date1){
@@ -44,45 +50,73 @@ public Class Date{
         else 
          System.out.println("Las fechas difieren.");
     }
+    public boolean monthDays (){
+        int monthdays = 0;
+        swicth(this.getMonth()){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12: 
+                monthdays = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                monthdays = 30;
+                break;
+            case 2: 
+                monthdays = 28;
+                break;
+        } 
+        
+        return monthdays;
+    }
+    public boolean isDayRight (){
+        return this.day <= this.monthDays();
+    }    
     public String nameMonth (){
         String NameMonth;
         swicth (this.month){
             case 1:
-             nameMonth = "Enero";
-             break;
+                nameMonth = "Enero";
+                break;
             case 2:
-             NameMonth = "Febrero";
-             break;
+                NameMonth = "Febrero";
+                break;
             case 3:
-             NameMonth = "Marzo";
-             break;
+                NameMonth = "Marzo";
+                break;
             case 4:
-             NameMonth = "Abril";
-             break;
+                NameMonth = "Abril";
+                break;
             case 5:
-             NameMonth = "Mayo";
-             break;
+                NameMonth = "Mayo";
+                break;
             case 6:
-             NameMonth = "Junio";
-             break;
+                NameMonth = "Junio";
+                break;
             case 7:
-             NameMonth = "Julio";
-             break;
+                NameMonth = "Julio";
+                break;
             case 8:
-             NameMonth = "Agosto";
-             break;
+                NameMonth = "Agosto";
+                break;
             case 9:
-             NameMonth = "Septiembre";
-             break;
+                NameMonth = "Septiembre";
+                break;
             case 10:
-             NameMonth = "Octubre";
-             break;
+                NameMonth = "Octubre";
+                break;
             case 11:
-             NameMonth = "Noviembre";
-             break;
+                NameMonth = "Noviembre";
+                break;
             case 12:
-             NameMonth = "Diciembre";
-             break;
+                NameMonth = "Diciembre";
+                break;
         }
         return NameMonth;
     }
@@ -92,23 +126,23 @@ public Class Date{
             case 12:
             case 1:
             case 2:
-             season = "Invierno";
-             break;
+                season = "Invierno";
+                break;
             case 3:
             case 4:
             case 5:
-             season = "Primavera";
-             break;
+                season = "Primavera";
+                break;
             case 6:
             case 7:
             case 8:
-             season = "Verano";
-             break;
+                season = "Verano";
+                break;
             case 9:
             case 10:
             case 11:
-             season = "Otoño";
-             break;
+                season = "Otoño";
+                break;
         }
         return season;
     }

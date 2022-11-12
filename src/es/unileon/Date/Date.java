@@ -1,4 +1,4 @@
-public Class Date{
+public class Date{
     private int day;
     private int month;
     private int year;
@@ -44,13 +44,15 @@ public Class Date{
         return valor3;
     }
     public boolean isSame (Date date2){
+        boolean valor3;
         if (this.date2 == this.date1){
-            System.out.println("Ambas fechas son iguales.");
+            valor4 = true;
         }
         else 
-         System.out.println("Las fechas difieren.");
+         valor4 = false;
+        return valor4;
     }
-    public boolean monthDays (){
+    public int monthDays (){
         int monthdays = 0;
         swicth(this.getMonth()){
             case 1:
@@ -146,4 +148,56 @@ public Class Date{
         }
         return season;
     }
+    void getDaysUntilEndMonth(){
+        for (int i=this.day; i<=this.monthDays(); i++){
+            System.out.println(i + "/" + this.month + "/" + this.year);
+        }
+    }
+    public String getDateString(){
+        String dateString = Integer.toString(Date);
+    }
+    public void getMonthsUntilEndYear(){
+        for (int i=this.month; i<=12; i++){
+            System.out.println(i.getseason());
+        }
+    }
+    public void getSameDaysMonths(){
+        String monthSameDays;
+        swicth (this.monthDays){
+            case 30:
+                monthSameDays = "Abril, Junio, Septiembre, Noviembre";
+                break;
+            case 31:
+                monthSameDays = "Enero, Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
+                break;
+            default:
+                monthSameDays = "No hay ninguno";
+                break;
+        }
+        return monthSameDays;
+    }
+    public int getDaysFromDate (){
+        int totalDays = this.
+    }
+    public void getDaysSinceStartYear(){
+        for (int i=this.day, j=this.month; j>0; i++, j--){
+            System.out.println(i);  
+        } 
+    }
+    //Build a method that counts the number of attempts needed to generate a random date equals to a given date (only inside the same year)
+    public int attemptsRandomDateEqual(){
+        double randomDay = Math.random()*30+1
+        double randomMonth = Math.random()*12+1
+        int attempts;
+        attempts = 0;
+        while ( randomDay != this.day && randomMonth != this.month){
+            attempts = attempts + 1;
+        }
+        System.out.println(attempts);
+        do {
+            attempts = attempts + 1;
+        } while (randomDay != this.day && randomMonth != this.month);
+        System.out.println(attempts);
+    }
+
 }

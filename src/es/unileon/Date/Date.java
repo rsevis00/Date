@@ -158,7 +158,7 @@ public class Date{
     }
     public void getMonthsUntilEndYear(){
         for (int i=this.month; i<=12; i++){
-            System.out.println(i.getseason());
+            System.out.println(i.nameMonth());
         }
     }
     public void getSameDaysMonths(){
@@ -175,9 +175,6 @@ public class Date{
                 break;
         }
         return monthSameDays;
-    }
-    public int getDaysFromDate (){
-        int totalDays = this.
     }
     public void getDaysSinceStartYear(){
         for (int i=this.day, j=this.month; j>0; i++, j--){
@@ -198,6 +195,42 @@ public class Date{
             attempts = attempts + 1;
         } while (randomDay != this.day && randomMonth != this.month);
         System.out.println(attempts);
+    }
+    //For a given date and knowing the day of the week of the first day of the year of that date, return the day of the week of the given date.
+    public int getDaysPass(){
+        int daypass = this.day;
+        while ( this.month > 1){
+            daypass = daypass + this.monthDays();
+            this.month = this.month - 1;
+        }
+    }
+    public void getWeekDay(){
+        String namedayweek;
+        int modulodays = this.getDaysPass/7;
+        int dayweek = this.getDaysPass - (modulodays * 7);
+        switch (dayweek){
+            case 1:
+                namedayweek = "Lunes";
+                break;
+            case 2:
+                namedayweek = "Martes";
+                break;
+            case 3:
+                namedayweek = "Miércoles";
+                break;
+            case 4:
+                namedayweek = "Jueves";
+                break;
+            case 5:
+                namedayweek = "Viernes";
+                break;
+            case 6:
+                namedayweek = "Sabado";
+                break;
+            case 7:
+                namedayweek = "Domingo";
+                break;
+        }
     }
 
 }

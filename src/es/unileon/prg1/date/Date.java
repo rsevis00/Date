@@ -1,3 +1,5 @@
+package es.unileon.prg1.date;
+
 public class Date{
     private int day;
     private int month;
@@ -6,28 +8,31 @@ public class Date{
         this.day = day;
         this.month = month;
         this.year = year;
-        int get.day(){
-            return this.day;
-        }
-        int get.month(){
-            return this.month;
-        }
-        int get.year(){
-            return this.year;
-        }
+        
     }
      public boolean isSameDay(Date date2){
         boolean valor1;
-        if (date2.getday == this.day){
+        if (date2.getDay() == this.day){
             valor1 = true;
         }
         else
          valor1 = false;
         return valor1;
     }
+
+    int getDay(){
+        return this.day;
+    }
+    int getMonth(){
+        return this.month;
+    }
+    int getYear(){
+        return this.year;
+    }
+
     public boolean isSameMonth(Date date2){
         boolean valor2;
-        if (date2.getMonth == this.month){
+        if (date2.getMonth() == this.month){
             valor2 = true;
         }
         else
@@ -36,25 +41,16 @@ public class Date{
     }
     public boolean isSameYear(Date date2){
         boolean valor3;
-        if (date2.getYear == this.year){
+        if (date2.getYear() == this.year){
             valor3 = true;
         }
         else
          valor3 = false;
         return valor3;
     }
-    public boolean isSame (Date date2){
-        boolean valor3;
-        if (this.date2 == this.date1){
-            valor4 = true;
-        }
-        else 
-         valor4 = false;
-        return valor4;
-    }
     public int monthDays (){
         int monthdays = 0;
-        swicth(this.getMonth()){
+        switch(this.getMonth()){
             case 1:
             case 3:
             case 5:
@@ -81,10 +77,10 @@ public class Date{
         return this.day <= this.monthDays();
     }    
     public String nameMonth (){
-        String NameMonth;
-        swicth (this.month){
+        String NameMonth = "";
+        switch (this.month){
             case 1:
-                nameMonth = "Enero";
+                NameMonth = "Enero";
                 break;
             case 2:
                 NameMonth = "Febrero";
@@ -123,8 +119,8 @@ public class Date{
         return NameMonth;
     }
     public String getSeason (){
-        String season;
-        swicth (this.month){
+        String season = "";
+        switch (this.month){
             case 12:
             case 1:
             case 2:
@@ -148,22 +144,28 @@ public class Date{
         }
         return season;
     }
-    void getDaysUntilEndMonth(){
+    public void getDaysUntilEndMonth(){
         for (int i=this.day; i<=this.monthDays(); i++){
             System.out.println(i + "/" + this.month + "/" + this.year);
         }
     }
-    public String getDateString(){
-        String dateString = Integer.toString(Date);
+    public String toString(){
+       StringBuffer salida = new StringBuffer();
+       salida.append(this.day+"/"+this.month+"/"+this.year);
+       return salida.toString();
     }
-    public void getMonthsUntilEndYear(){
-        for (int i=this.month; i<=12; i++){
-            System.out.println(i.nameMonth());
+    public int getMonthsUntilEndYear(){
+        if (this.isDayRight()){
+            return 12-this.month;
         }
+        System.out.println("Ecriba un mes valido entre 1 y 12");
+        return 0;
+        
+      
     }
-    public void getSameDaysMonths(){
-        String monthSameDays;
-        swicth (this.monthDays){
+    public String getSameDaysMonths(){
+        String monthSameDays = "";
+        switch (this.monthDays()){
             case 30:
                 monthSameDays = "Abril, Junio, Septiembre, Noviembre";
                 break;
@@ -171,7 +173,7 @@ public class Date{
                 monthSameDays = "Enero, Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
                 break;
             default:
-                monthSameDays = "No hay ninguno";
+                monthSameDays = "Febrero";
                 break;
         }
         return monthSameDays;
@@ -182,9 +184,9 @@ public class Date{
         } 
     }
     //Build a method that counts the number of attempts needed to generate a random date equals to a given date (only inside the same year)
-    public int attemptsRandomDateEqual(){
-        double randomDay = Math.random()*30+1
-        double randomMonth = Math.random()*12+1
+    public void attemptsRandomDateEqual(){
+        double randomDay = Math.random()*30+1;
+        double randomMonth = Math.random()*12+1;
         int attempts;
         attempts = 0;
         while ( randomDay != this.day && randomMonth != this.month){
@@ -203,11 +205,12 @@ public class Date{
             daypass = daypass + this.monthDays();
             this.month = this.month - 1;
         }
+        return daypass;
     }
-    public void getWeekDay(){
-        String namedayweek;
-        int modulodays = this.getDaysPass/7;
-        int dayweek = this.getDaysPass - (modulodays * 7);
+    public String getWeekDay(){
+        String namedayweek = "";
+        int modulodays = this.getDaysPass()/7;
+        int dayweek = this.getDaysPass() - (modulodays * 7);
         switch (dayweek){
             case 1:
                 namedayweek = "Lunes";
@@ -231,6 +234,7 @@ public class Date{
                 namedayweek = "Domingo";
                 break;
         }
+        return namedayweek;
     }
 
 }

@@ -117,7 +117,7 @@ public class DateTest {
 	}
 
 	@Test
-	public void testTomorrow() {
+	public void testTomorrow() throws DateException {
 		assertEquals(1, today.getDay());
 		assertEquals(1, today.getMonth());
 		assertEquals(2017, today.getYear());

@@ -6,73 +6,108 @@ public class Date{
     private int year;
     private Object aDay;
     private Object today;
-    public Date(int day, int month, int year){
-        this.day = day;
-        this.month = month;
-        this.year = year;
+
+       
+    public Date(int day, int month, int year) throws DateException {
+        if (year < 1) {
+            throw new DateException("Date error: Year " + year + " not valid");
+        }
+        this.year=year;
+        if (month < 1 || month > 12 ) {
+            throw new DateException("Date error: Month " + month + " not valid");
+        }
+        this.month=month;
+        if ( day < 1 || day > this.daysOfMonth() ) {
+			throw new DateException("Date error: Day " + day + " not valid");			
+		}
+        this.day=day;
+    }
+    
+    public Date(){
+        this.day = 1;
+        this.month = 1;
+        this.year = 2017;
         
     }
 
     public Date(Date today) {
+        this.day = 1;
+        this.month = 1;
+        this.year = 2017;
+        
+    }
+    
+    public Date today() throws DateException {
+        Date today = new Date(1,1,2017);
+        return today;
     }
 
-    public Date() throws DateException {
-        if (year < 1) {
-            throw new DateException("Date error: Year " + year + " not valid");
+    public Date tomorrow() throws DateException {
+        Date tomorrow = new Date();
+        try {
+            tomorrow.setDay(this.getDay()+1);
+            tomorrow.setMonth(1);
+            tomorrow.setYear(this.getYear());
+            
+            if (this.getDay() == this.daysOfMonth()){
+                tomorrow.setDay(1);
+                tomorrow.setMonth(this.getMonth() + 1);
+            } else if (this.getMonth() == 12 && this.getDay() == 31){
+                tomorrow.setDay(1);
+                tomorrow.setMonth(1);
+                tomorrow.setYear(this.getYear()+1);
+            }
+        } catch (DateException e) {
+            System.out.println(e.getMessage());
         }
-        this.year = year;
-        if (month < 1 || month > 12 ) {
-            throw new DateException("Date error: Month " + month + " not valid");
-        }
-        this.month = month;
-        if ( day < 1 || day > this.daysOfMonth() ) {
-			throw new DateException("Date error: Day " + day + " not valid");			
-		}
-		this.day = day;
+        return tomorrow;
     }
 
-    public Date tomorrow() {
-        return null;
+    public int getDay(){
+        return this.day;
+    }
+    public int getMonth(){
+        return this.month;
+    }
+    public int getYear(){
+        return this.year;
     }
 
-    public void setDay(int day) throws DateException {
+
+    public int setDay(int n) throws DateException {
+        this.day = n;
 		if ( day < 1 || day > this.daysOfMonth() ) {
 			throw new DateException("Date error: Day " + day + " of month " + this.month + " not valid");			
 		}
-		this.day = day;
-       
+        return this.day;
     	}
 
-    public void setMonth (int month) throws DateException {
-		if ( month < 1 || month > 12) {
-			throw new DateException("Date error: Month " + month + " not valid");
+    public int setMonth (int n) throws DateException {
+		this.month = n;
+        if ( month < 1 || month > 12) {
+			throw new DateException("Date error: Day " + day + " of month " + this.month + " not valid");
 		}
-		this.month = month;
+		return this.month;
 	}
 	
-	public void setYear (int year) {
-		this.year = year;
+	public int setYear (int n) throws DateException {
+		this.year = n;
+        if (year < 1) {
+            throw new DateException("Date error: Day " + day + " of month " + this.month + " not valid");
+        }
+        return this.year;
 	}
 
-    public boolean isSameDay(Date tomorrow){
-        boolean valor1;
-        if (tomorrow.getDay() == this.day){
-            valor1 = true;
+    public boolean isSameDay(Date aDay){
+        boolean valor;
+        if (aDay.getDay() == this.day){
+            valor = true;
         }
         else
-         valor1 = false;
-        return valor1;
+         valor = false;
+        return valor;
     }
 
-    int getDay(){
-        return this.day;
-    }
-    int getMonth(){
-        return this.month;
-    }
-    int getYear(){
-        return this.year;
-    }
 
     public boolean isSameMonth(Date aDay){
         boolean valor2;
@@ -88,19 +123,21 @@ public class Date{
         if (aDay.getYear() == this.year){
             valor3 = true;
         }
-        else
+        else {
          valor3 = false;
+        }
         return valor3;
     }
 
     public boolean isSame (Date aDay){
-        boolean valor4;
-        if (this.aDay == this.today){
-            valor4 = true;
+        boolean valor;
+        if (aDay == today){
+            valor = true;
         }
-        else 
-         valor4 = false;
-        return valor4;
+        else {
+         valor = false;
+        }
+        return valor;
     }
 
     public int daysOfMonth (){
@@ -135,40 +172,40 @@ public class Date{
         String getMonthName = "";
         switch (this.month){
             case 1:
-                getMonthName = "Enero";
+                getMonthName = "January";
                 break;
             case 2:
-                getMonthName = "Febrero";
+                getMonthName = "February";
                 break;
             case 3:
-                getMonthName = "Marzo";
+                getMonthName = "March";
                 break;
             case 4:
-                getMonthName = "Abril";
+                getMonthName = "April";
                 break;
             case 5:
-                getMonthName = "Mayo";
+                getMonthName = "May";
                 break;
             case 6:
-                getMonthName = "Junio";
+                getMonthName = "June";
                 break;
             case 7:
-                getMonthName = "Julio";
+                getMonthName = "July";
                 break;
             case 8:
-                getMonthName = "Agosto";
+                getMonthName = "August";
                 break;
             case 9:
-                getMonthName = "Septiembre";
+                getMonthName = "September";
                 break;
             case 10:
-                getMonthName = "Octubre";
+                getMonthName = "October";
                 break;
             case 11:
-                getMonthName = "Noviembre";
+                getMonthName = "November";
                 break;
             case 12:
-                getMonthName = "Diciembre";
+                getMonthName = "December";
                 break;
         }
         return getMonthName;
@@ -179,91 +216,125 @@ public class Date{
             case 12:
             case 1:
             case 2:
-                season = "Invierno";
+                season = "Winter";
                 break;
             case 3:
             case 4:
             case 5:
-                season = "Primavera";
+                season = "Spring";
                 break;
             case 6:
             case 7:
             case 8:
-                season = "Verano";
+                season = "Summer";
                 break;
             case 9:
             case 10:
             case 11:
-                season = "Otoño";
+                season = "Autumn";
                 break;
         }
         return season;
     }
 
     public String getDaysLeftOfMonth(){
-        String daysleft = "";
-        for (int i=this.day; i<=this.daysOfMonth(); i++){
-            System.out.println((i + "/" + this.month + "/" + this.year).toString());
+        StringBuffer salida = new StringBuffer();
+        while (this.day < this.daysOfMonth()){
+            this.day++;
+            salida.append(this + " ");
         }
-        return daysleft;
+        return salida.toString();
     }
     public String toString(){
        StringBuffer salida = new StringBuffer();
        salida.append(this.day+"/"+this.month+"/"+this.year);
        return salida.toString();
     }
-    public int getMonthsLeft(){
-        if (this.isDayRight()){
-            return 12-this.month;
+    public String getMonthsLeft(){
+        String monthsleft = "";
+        int monthsleft2 = 12 - this.month;      
+        switch (monthsleft2){
+            case 1:
+                monthsleft = "December ";
+                break;
+            case 2:
+                monthsleft = "November December ";
+                break;
+            case 3:
+                monthsleft = "October November December ";
+                break;
+            case 4:
+                monthsleft = "September October November December ";
+                break;
+            case 5:
+                monthsleft = "August September October November December ";
+                break;
+            case 6:
+                monthsleft = "July August September October November December ";
+                break;
+            case 7:
+                monthsleft = "June July August September October November December ";
+                break;
+            case 8:
+                monthsleft = "May June July August September October November December ";
+                break;
+            case 9:
+                monthsleft = "April May June July August September October November December ";
+                break;
+            case 10:
+                monthsleft = "March April May June July August September October November December ";
+                break;
+            case 11:
+                monthsleft = "February March April May June July August September October November December ";
+                break;
         }
-        System.out.println("Ecriba un mes valido entre 1 y 12");
-        return 0;
-        
-      
+        return monthsleft;
     }
     public String getMonthsSameDays(){
         String monthSameDays = "";
         switch (this.daysOfMonth()){
             case 30:
-                monthSameDays = "Abril, Junio, Septiembre, Noviembre";
+                monthSameDays = "April June September November ";
                 break;
             case 31:
-                monthSameDays = "Enero, Marzo, Mayo, Julio, Agosto, Octubre, Diciembre";
+                monthSameDays = "January March May July August October December ";
                 break;
             default:
-                monthSameDays = "Febrero";
+                monthSameDays = "February ";
                 break;
         }
         return monthSameDays;
     }
     public int daysPast(){
-        int daypass = 0;
-        for (int i=this.day, j=this.month; j>0; i++, j--){
-           daypass = daypass + 1;
-        } 
+        int daypass = this.day -1;
+        while ( this.month > 1){
+            this.month = this.month - 1;
+            daypass = daypass + this.daysOfMonth();
+        }
         return daypass;
     }
     //Build a method that counts the number of attempts needed to generate a random date equals to a given date (only inside the same year)
     public int numRandomTriesEqualDate(){
-        double randomDay = Math.random()*30+1;
-        double randomMonth = Math.random()*12+1;
+        double randomDay = 0;
+        double randomMonth = 0;
         int attempts;
         attempts = 0;
         while ( randomDay != this.day && randomMonth != this.month){
+            randomDay = Math.random()*30+1;
+            randomDay = (int) randomDay;
+            randomMonth = Math.random()*12+1;
+            randomMonth = (int) randomMonth;
             attempts = attempts + 1;
         }
         System.out.println(attempts);
-        do {
-            attempts = attempts + 1;
-        } while (randomDay != this.day && randomMonth != this.month);
-        System.out.println(attempts);
+      
 
         return attempts;
     }
 
     //For a given date and knowing the day of the week of the first day of the year of that date, return the day of the week of the given date.
     public int getDaysPass(){
-        int daypass = this.day;
+        int daypass = this.day -1;
         while ( this.month > 1){
             daypass = daypass + this.daysOfMonth();
             this.month = this.month - 1;
@@ -274,28 +345,29 @@ public class Date{
     public String dayOfWeek(int i){
         String namedayweek = "";
         int modulodays = this.getDaysPass()/7;
-        int dayweek = this.getDaysPass() - (modulodays * 7);
+        //- (modulodays * 7);
+        int dayweek = this.daysPast()%7;
         switch (dayweek){
+            case 0:
+                namedayweek = "Monday";
+                break;
             case 1:
-                namedayweek = "Lunes";
+                namedayweek = "Tuesday";
                 break;
             case 2:
-                namedayweek = "Martes";
+                namedayweek = "Wednesday";
                 break;
             case 3:
-                namedayweek = "Miércoles";
+                namedayweek = "Thursday";
                 break;
             case 4:
-                namedayweek = "Jueves";
+                namedayweek = "Friday";
                 break;
             case 5:
-                namedayweek = "Viernes";
+                namedayweek = "Saturday";
                 break;
             case 6:
-                namedayweek = "Sabado";
-                break;
-            case 7:
-                namedayweek = "Domingo";
+                namedayweek = "Sunday";
                 break;
         }
         return namedayweek;

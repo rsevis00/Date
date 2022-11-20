@@ -4,9 +4,6 @@ public class Date{
     private int day;
     private int month;
     private int year;
-    private Object aDay;
-    private Object today;
-
        
     public Date(int day, int month, int year) throws DateException {
         if (year < 1) {
@@ -45,17 +42,18 @@ public class Date{
     public Date tomorrow() throws DateException {
         Date tomorrow = new Date();
         try {
-            tomorrow.setDay(this.getDay()+1);
-            tomorrow.setMonth(1);
-            tomorrow.setYear(this.getYear());
             
-            if (this.getDay() == this.daysOfMonth()){
+            if (this.getDay() == this.daysOfMonth() && this.getMonth() != 12){
                 tomorrow.setDay(1);
                 tomorrow.setMonth(this.getMonth() + 1);
             } else if (this.getMonth() == 12 && this.getDay() == 31){
                 tomorrow.setDay(1);
                 tomorrow.setMonth(1);
                 tomorrow.setYear(this.getYear()+1);
+            } else {
+                tomorrow.setDay(this.getDay()+1);
+            tomorrow.setMonth(this.getMonth());
+            tomorrow.setYear(this.getYear());
             }
         } catch (DateException e) {
             System.out.println(e.getMessage());
@@ -87,6 +85,9 @@ public class Date{
         if ( month < 1 || month > 12) {
 			throw new DateException("Date error: Day " + day + " of month " + this.month + " not valid");
 		}
+        if ( day > this.daysOfMonth()) {
+            throw new DateException("Date error: Day " + day + " of month " + this.month + " not valid");
+        }
 		return this.month;
 	}
 	
@@ -109,18 +110,18 @@ public class Date{
     }
 
 
-    public boolean isSameMonth(Date aDay){
+    public boolean isSameMonth(Date date){
         boolean valor2;
-        if (aDay.getMonth() == this.month){
+        if (date.getMonth() == this.month){
             valor2 = true;
         }
         else
          valor2 = false;
         return valor2;
     }
-    public boolean isSameYear(Date aDay){
+    public boolean isSameYear(Date date){
         boolean valor3;
-        if (aDay.getYear() == this.year){
+        if (date.getYear() == this.year){
             valor3 = true;
         }
         else {
@@ -129,9 +130,9 @@ public class Date{
         return valor3;
     }
 
-    public boolean isSame (Date aDay){
+    public boolean isSame (Date date){
         boolean valor;
-        if (aDay == today){
+        if (this.day == date.getDay() && this.month == date.getMonth() && this.year == date.getYear()){
             valor = true;
         }
         else {
@@ -344,9 +345,8 @@ public class Date{
     
     public String dayOfWeek(int i){
         String namedayweek = "";
-        int modulodays = this.getDaysPass()/7;
-        //- (modulodays * 7);
-        int dayweek = this.daysPast()%7;
+        int daypass = this.daysPast();
+        int dayweek = daypass%7;
         switch (dayweek){
             case 0:
                 namedayweek = "Monday";

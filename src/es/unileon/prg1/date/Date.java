@@ -314,7 +314,7 @@ public class Date{
         }
         return daypass;
     }
-    //Build a method that counts the number of attempts needed to generate a random date equals to a given date (only inside the same year)
+
     public int numRandomTriesEqualDate(){
         double randomDay = 0;
         double randomMonth = 0;
@@ -333,7 +333,6 @@ public class Date{
         return attempts;
     }
 
-    //For a given date and knowing the day of the week of the first day of the year of that date, return the day of the week of the given date.
     public int getDaysPass(){
         int daypass = this.day -1;
         while ( this.month > 1){
